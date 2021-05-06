@@ -1,0 +1,19 @@
+{
+  "name": "sdc-products",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TACOver/sdc-products.git"
+  },
+  "author": "Tamir Amitai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TACOver/sdc-products/issues"
+  },
+  "homepage": "https://github.com/TACOver/sdc-products#readme"
+}
