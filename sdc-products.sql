@@ -7,7 +7,7 @@ CREATE TABLE public.products
     product_id integer NOT NULL,
     product_name text COLLATE pg_catalog."default" NOT NULL,
     slogan text COLLATE pg_catalog."default",
-    description text COLLATE pg_catalog."default" NOT NULL,
+    product_description text COLLATE pg_catalog."default" NOT NULL,
     category text COLLATE pg_catalog."default" NOT NULL,
     default_price integer NOT NULL,
     CONSTRAINT products_pkey PRIMARY KEY (product_id)
@@ -16,7 +16,7 @@ CREATE TABLE public.products
 TABLESPACE pg_default;
 
 ALTER TABLE public.products
-    OWNER to postgres;
+    OWNER to tamir;
 
 -- Table: public.features
 
@@ -38,7 +38,7 @@ CREATE TABLE public.features
 TABLESPACE pg_default;
 
 ALTER TABLE public.features
-    OWNER to postgres;
+    OWNER to tamir;
 
 -- Table: public.styles
 
@@ -47,10 +47,10 @@ ALTER TABLE public.features
 CREATE TABLE public.styles
 (
     style_id integer NOT NULL,
-    style_name text COLLATE pg_catalog."default" NOT NULL,
+    style_name text NOT NULL,
     original_price integer NOT NULL,
-    sale_price integer,
-    "isdefault?" boolean,
+    sale_price text NULL,
+    isdefault boolean NULL,
     product_id integer,
     CONSTRAINT styles_pkey PRIMARY KEY (style_id),
     CONSTRAINT fk_product FOREIGN KEY (product_id)
@@ -62,7 +62,7 @@ CREATE TABLE public.styles
 TABLESPACE pg_default;
 
 ALTER TABLE public.styles
-    OWNER to postgres;
+    OWNER to tamir;
 
 -- Table: public.related
 
@@ -83,19 +83,19 @@ CREATE TABLE public.related
 TABLESPACE pg_default;
 
 ALTER TABLE public.related
-    OWNER to postgres;
+    OWNER to tamir;
 
 -- Table: public.SKUs
 
 -- DROP TABLE public."SKUs";
 
-CREATE TABLE public."SKUs"
+CREATE TABLE public."skus"
 (
     sku_id integer NOT NULL,
     quantity integer,
     item_size text COLLATE pg_catalog."default",
     style_id integer,
-    CONSTRAINT "SKUs_pkey" PRIMARY KEY (sku_id),
+    CONSTRAINT "skus_pkey" PRIMARY KEY (sku_id),
     CONSTRAINT fk_style FOREIGN KEY (style_id)
         REFERENCES public.styles (style_id) MATCH SIMPLE
         ON UPDATE NO ACTION
@@ -104,8 +104,8 @@ CREATE TABLE public."SKUs"
 
 TABLESPACE pg_default;
 
-ALTER TABLE public."SKUs"
-    OWNER to postgres;
+ALTER TABLE public."skus"
+    OWNER to tamir;
 
 -- Table: public.photos
 
@@ -127,4 +127,4 @@ CREATE TABLE public.photos
 TABLESPACE pg_default;
 
 ALTER TABLE public.photos
-    OWNER to postgres;
+    OWNER to tamir;
