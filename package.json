@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "nodemon server/index.js"
   },
   "repository": {
     "type": "git",
@@ -21,5 +22,8 @@
     "node-postgres": "^0.6.2",
     "package.json": "^2.0.1",
     "postgres": "^1.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
   }
 }
