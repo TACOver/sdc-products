@@ -1,8 +1,7 @@
-const Pool = require('pg').Pool
-const pool = new Pool({
-  user: 'tamir',
-  host: 'localhost',
-  database: 'sdcproducts',
-  password: 'password',
-  port: 5432,
+const { Client } = require('pg')
+const client = new Client()
+client.connect()
+client.query('SELECT $1::text as message', ['Hello world!'], (err, res) => {
+  console.log(err ? err.stack : res.rows[0].message) // Hello World!
+  client.end()
 })
