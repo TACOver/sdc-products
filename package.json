@@ -19,6 +19,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "node-postgres": "^0.6.2",
+    "package.json": "^2.0.1",
     "postgres": "^1.0.2"
   }
 }
