@@ -26,7 +26,7 @@ CREATE TABLE public.features
 (
     feature_id integer NOT NULL,
     feature_name text COLLATE pg_catalog."default" NOT NULL,
-    feature_value text COLLATE pg_catalog."default" NOT NULL,
+    feature_value text COLLATE pg_catalog."default",
     product_id integer,
     CONSTRAINT features_pkey PRIMARY KEY (feature_id),
     CONSTRAINT fk_product FOREIGN KEY (product_id)
