@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/TACOver/sdc-products/issues"
   },
-  "homepage": "https://github.com/TACOver/sdc-products#readme"
+  "homepage": "https://github.com/TACOver/sdc-products#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "node-postgres": "^0.6.2",
+    "postgres": "^1.0.2"
+  }
 }
