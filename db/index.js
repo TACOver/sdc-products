@@ -1,7 +1,15 @@
-const { Client } = require('pg')
-const client = new Client()
-client.connect()
-client.query('SELECT $1::text as message', ['Hello world!'], (err, res) => {
-  console.log(err ? err.stack : res.rows[0].message) // Hello World!
-  client.end()
+const Pool = require('pg').Pool
+const pool = new Pool({
+  user: 'tamir',
+  host: 'localhost',
+  database: 'sdcproducts',
+  password: 'password',
+  port: 5432,
+});
+
+pool.query('SELECT * FROM products WHERE product_id=1', (error, results) => {
+  if (error) {
+    throw error
+  }
+  console.log(results.rows);
 })
