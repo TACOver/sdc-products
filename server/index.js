@@ -40,9 +40,13 @@ app.get('/products', (req, res) => {
 
 
 app.get('/products/:productId', (req, res) => {
-  const SQL = `SELECT * FROM products 
-                INNER JOIN features USING (product_id) 
-                WHERE product_id=${req.params.productId}`;
+  const SQL = 
+    `SELECT product_id, product_name, slogan, product_description, category, default_price,
+      jsonb_agg (jsonb_build_object('name', features.feature_name, 'value', features.feature_value )) features
+      FROM products 
+      INNER JOIN features USING (product_id) 
+      WHERE product_id=${req.params.productId}
+      GROUP BY product_id`;
   db.query(SQL)
     .then( results => {
       res.status(200);
