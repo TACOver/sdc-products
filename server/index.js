@@ -32,16 +32,23 @@ app.get('/products', (req, res) => {
   }
   db.query(SQL)
     .then( results => {
+      res.status(200);
       res.send(results.rows);
       res.end();
     });
 });
 
 
-app.get('/products/:product_id', (req, res) => {
-  `SELECT * FROM products 
-    INNER JOIN features USING (product_id) 
-    WHERE product_id=${req.product_id}`//not correct syntax for product_id
+app.get('/products/:productId', (req, res) => {
+  const SQL = `SELECT * FROM products 
+                INNER JOIN features USING (product_id) 
+                WHERE product_id=${req.params.productId}`;
+  db.query(SQL)
+    .then( results => {
+      res.status(200);
+      res.send(results.rows);
+      res.end();
+    });
 });
 
 app.listen(port, () => {
