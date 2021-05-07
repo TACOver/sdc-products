@@ -12,14 +12,14 @@ app.get('/products', (req, res) => {
   const { page, count } = req.query;
   let pageOffset = 0;
   let SQL = 'SELECT * FROM products';
-  if (page) {
-    if (!parseInt(page)) {
-      res.status(422);
-      res.end();
-    } else {
-      pageOffset = (parseInt(page) - 1) * 100;
-    }
-  }
+  // if (page) {
+  //   if (!parseInt(page)) {
+  //     res.status(422);
+  //     res.end();
+  //   } else {
+  //     pageOffset = (parseInt(page) - 1) * 100;
+  //   }
+  // }
   if (count) {
     if (!parseInt(count)) {
       res.status(422);
