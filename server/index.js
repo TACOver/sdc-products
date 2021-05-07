@@ -10,20 +10,37 @@ app.get('/', (req, res) => {
 
 app.get('/products', (req, res) => {
   const { page, count } = req.query;
-  let SQL = 'SELECT * FROM products ORDER BY product_id LIMIT 5';
+  let pageOffset = 0;
+  let SQL = 'SELECT * FROM products';
+  if (page) {
+    if (!parseInt(page)) {
+      res.status(422);
+      res.end();
+    } else {
+      pageOffset = (parseInt(page) - 1) * 100;
+    }
+  }
   if (count) {
     if (!parseInt(count)) {
       res.status(422);
       res.end();
     } else {
-      SQL = `SELECT * FROM products ORDER BY product_id LIMIT ${count}`;
+      SQL += ` LIMIT ${count}`;
     }
+  } else {
+    SQL += ' LIMIT 5';
   }
   db.query(SQL)
     .then( results => {
-      res.send(JSON.stringify(results.rows));
+      res.send(results.rows);
       res.end();
     });
+});
+
+app.get('/products/:product_id', (req, res) => {
+  `SELECT * FROM products 
+    INNER JOIN features USING (product_id) 
+    WHERE product_id=${req.product_id}`//not correct syntax for product_id
 });
 
 app.listen(port, () => {
