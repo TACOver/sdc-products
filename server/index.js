@@ -1,5 +1,4 @@
 const express = require('express');
-const router = require('../routes');
 const db = require('../db');
 
 const app = express();
@@ -11,7 +10,15 @@ app.get('/', (req, res) => {
 
 app.get('/products', (req, res) => {
   const { page, count } = req.query;
-  const SQL = `SELECT * FROM products ORDER BY product_id LIMIT ${count}`;
+  let SQL = 'SELECT * FROM products ORDER BY product_id LIMIT 5';
+  if (count) {
+    if (!parseInt(count)) {
+      res.status(422);
+      res.end();
+    } else {
+      SQL = `SELECT * FROM products ORDER BY product_id LIMIT ${count}`;
+    }
+  }
   db.query(SQL)
     .then( results => {
       res.send(JSON.stringify(results.rows));
