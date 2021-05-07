@@ -38,6 +38,12 @@ app.get('/products', (req, res) => {
 });
 
 
+app.get('/products/:product_id', (req, res) => {
+  `SELECT * FROM products 
+    INNER JOIN features USING (product_id) 
+    WHERE product_id=${req.product_id}`//not correct syntax for product_id
+});
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 });
