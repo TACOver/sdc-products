@@ -65,7 +65,7 @@ app.get('/products/:productId/styles', (req, res) => {
       jsonb_agg (distinct jsonb_build_object('sku_id',skus.sku_id,'size',skus.item_size,'quantity', skus.quantity)) skus
       FROM styles
       LEFT JOIN photos ON styles.style_id = photos.style_id
-      INNER JOIN skus ON styles.style_id = skus.style_id
+      LEFT JOIN skus ON styles.style_id = skus.style_id
       WHERE product_id=${req.params.productId}
       GROUP BY styles.style_id
     `;
