@@ -1,7 +1,9 @@
 const express = require('express');
+const cors = require('cors');
 const db = require('../db');
 
 const app = express();
+app.use(cors());
 const port = 3000;
 
 app.get('/', (req, res) => {
@@ -52,7 +54,7 @@ app.get('/products/:productId', (req, res) => {
   db.query(SQL)
     .then( results => {
       res.status(200);
-      res.send(results.rows[0]);
+      res.send(results.rows);
       res.end();
     });
 });
@@ -80,7 +82,7 @@ app.get('/products/:productId/styles', (req, res) => {
           'quantity': sku.quantity,
         };
       })
-      res.send(styles);
+      res.send([styles]);
       res.end();
     })
     .catch( err => {
