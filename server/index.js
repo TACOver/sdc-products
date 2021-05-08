@@ -61,10 +61,11 @@ app.get('/products/:productId/styles', (req, res) => {
   const SQL = 
     `
       SELECT styles.style_id, style_name, original_price, sale_price, isdefault,
-      jsonb_agg (jsonb_build_object('thumbnail_url',photos.thumbnail,'url',photos.url)) photos,
+      jsonb_agg (jsonb_build_object('thumbnail_url',photos.thumbnail,'url',photos.url)) photos
       FROM styles
       LEFT JOIN photos ON styles.style_id = photos.style_id
       WHERE product_id=${req.params.productId}
+      GROUP BY styles.style_id
     `;
     // SELECT styles.style_id, style_name, original_price, sale_price, isdefault,
     //   jsonb_agg (jsonb_build_object('thumbnail_url',1,'url',2)) photos,
