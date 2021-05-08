@@ -52,7 +52,7 @@ app.get('/products/:productId', (req, res) => {
   db.query(SQL)
     .then( results => {
       res.status(200);
-      res.send(results.rows);
+      res.send(results.rows[0]);
       res.end();
     });
 });
@@ -69,14 +69,18 @@ app.get('/products/:productId/styles', (req, res) => {
       WHERE product_id=${req.params.productId}
       GROUP BY styles.style_id
     `;
-    // SELECT styles.style_id, style_name, original_price, sale_price, isdefault,
-    //   jsonb_agg (jsonb_build_object('thumbnail_url',1,'url',2)) photos,
-    //   jsonb_agg (jsonb_build_object('name',1)) skus
-    //   FROM styles
-    //   LEFT JOIN photos USING style_id
   db.query(SQL)
     .then( results => {
-      res.send(results.rows);
+      let styles = results.rows.slice()[0];
+      let skus = styles.skus;
+      styles.skus = {};
+      skus.forEach(sku => {
+        styles.skus[sku.sku_id] = {
+          'size': sku.size,
+          'quantity': sku.quantity,
+        };
+      })
+      res.send(styles);
       res.end();
     })
     .catch( err => {
