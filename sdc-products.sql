@@ -72,9 +72,9 @@ CREATE TABLE public.related
 (
     related_id integer NOT NULL,
     related_product_id integer,
-    current_product_id integer,
+    product_id integer,
     CONSTRAINT related_pkey PRIMARY KEY (related_id),
-    CONSTRAINT fk_product FOREIGN KEY (current_product_id)
+    CONSTRAINT fk_product FOREIGN KEY (product_id)
         REFERENCES public.products (product_id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
