@@ -86,6 +86,27 @@ app.get('/products/:productId/styles', (req, res) => {
     });
 });
 
+app.get('/products/:productId/related', (req,res) => {
+  const SQL = 
+    `
+      SELECT 
+        array_agg(related_product_id)
+      FROM
+        related 
+      WHERE product_id=${req.params.productId}
+    `;
+  db.query(SQL)
+    .then( results => {
+      res.send(results.rows[0].array_agg);
+      res.end();
+    })
+    .catch( err => {
+      res.status(400);
+      res.end();
+      console.log(err);
+    });
+});
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 });
