@@ -6,7 +6,9 @@ const pool = new Pool({
   password: 'password',
   port: 5432,
 });
+pool.connect();
 
 module.exports = {
+  pool,
   query: (text, params) => pool.query(text, params),
 };
