@@ -1,11 +1,10 @@
 const express = require('express');
 const cors = require('cors');
-const db = require('../db');
-const routes = require('./routes');
-
 const app = express();
+const routes = require('./routes')(app);
+
 app.use(cors());
-app.use(routes);
+// app.use(routes);
 const port = 3000;
 
 app.listen(port, () => {

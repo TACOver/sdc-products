@@ -1,7 +1,6 @@
+const db = require('../db');
+
 module.exports = (app) => {
-  app.get('/', (req, res) => {
-    res.send('Static files served');
-  });
   
   app.get('/products', (req, res) => {
     const { page, count } = req.query;
@@ -30,7 +29,8 @@ module.exports = (app) => {
         res.status(200);
         res.send(results.rows);
         res.end();
-      });
+      })
+      .catch(err => console.log(err));
   });
   
   
