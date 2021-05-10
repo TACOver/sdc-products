@@ -1,7 +1,11 @@
 const db = require('../db');
 
 module.exports = (app) => {
-  
+  app.get('/', (req, res) => {
+    res.send('sdc-products');
+    res.end();
+  });
+
   app.get('/products', (req, res) => {
     const { page, count } = req.query;
     let pageOffset = 0;
@@ -33,10 +37,9 @@ module.exports = (app) => {
       .catch( err => {
         res.status(400);
         res.end();
-        console.log(err);
+        console.log('ERR /products:', err);
       });
   });
-  
   
   app.get('/products/:productId', (req, res) => {
     const SQL = 
@@ -57,7 +60,7 @@ module.exports = (app) => {
       .catch( err => {
         res.status(400);
         res.end();
-        console.log(err);
+        console.log('ERR /products/:productId:',err);
       });
   });
   
@@ -90,7 +93,7 @@ module.exports = (app) => {
       .catch( err => {
         res.status(400);
         res.end();
-        console.log(err);
+        console.log('ERR /products/:productId/styles: ',err);
       });
   });
  
@@ -111,7 +114,7 @@ module.exports = (app) => {
       .catch( err => {
         res.status(400);
         res.end();
-        console.log(err);
+        console.log('ERR /products,/:productId/related: ',err);
       });
   });
 };
