@@ -30,7 +30,11 @@ module.exports = (app) => {
         res.send(results.rows);
         res.end();
       })
-      .catch(err => console.log(err));
+      .catch( err => {
+        res.status(400);
+        res.end();
+        console.log(err);
+      });
   });
   
   
@@ -49,6 +53,11 @@ module.exports = (app) => {
         res.status(200);
         res.send(results.rows);
         res.end();
+      })
+      .catch( err => {
+        res.status(400);
+        res.end();
+        console.log(err);
       });
   });
   
